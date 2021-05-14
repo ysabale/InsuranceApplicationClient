@@ -1,0 +1,24 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+  
+      <!-- Login Form -->
+      <form [formGroup]="signInForm" (ngSubmit)="SubmitForm()">
+
+        <div class="form-group col-xs-2">
+          <input type="text" placeholder= "User Id" formControlName="loginId" class="form-control" />
+      </div>
+
+      <div class="form-group col-xs-2">
+        <input type="password" id="password" class="fadeIn third" name="password" formControlName = "password" placeholder="Password">
+      </div>
+        <div class="form-group col-xs-2">
+          <button  class="btn btn-success" >Log In</button>
+      </div>
+      </form>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Create User</a>
+      </div>
+      <div><H2 style="color: red;">{{errorMessage}}</H2></div>
+    </div>
+  </div>

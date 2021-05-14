@@ -1,0 +1,18 @@
+<div style="margin-left: 10%;margin-top: 10px;">
+    <div class="ag-theme-balham">
+<button (click)="onAddRow()"class="btn-link">Add</button>
+<button (click)="updateItems()" class="btn-link">Edit</button>
+<button (click)="onRemoveSelected()" class="btn-link">Delete</button>
+
+<ag-grid-angular 
+style="width: 1203px; height: 500px;" 
+class="ag-theme-balham"
+[pagination]="true"
+[rowData]="rowData" 
+[columnDefs]="columnDefs"
+rowSelection="multiple"
+(gridReady)="onGridReady($event)"
+>
+</ag-grid-angular>
+</div>
+</div>
