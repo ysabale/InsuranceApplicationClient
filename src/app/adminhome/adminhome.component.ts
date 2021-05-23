@@ -1,8 +1,10 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ColDef, GridOptions } from 'ag-grid-community';
 import { ApiCallsService } from '../api-calls.service';
+import { AuthenticationService } from '../authentication.service';
+import { ButtonRendererComponent } from '../button-renderer-component';
 import { Insurancedetails } from '../insurancedetails';
 import { User } from '../user';
 
@@ -17,10 +19,14 @@ export class AdminhomeComponent {
   columnDefs: ColDef[] = [];
   rowData: User[] = [];
   insuranceDetails: Insurancedetails[];
+  frameworkComponents: any;
 
-  constructor(private apiCallService: ApiCallsService, private router: Router) { 
+  constructor(private apiCallService: ApiCallsService, private router: Router,public loginService:AuthenticationService) { 
     this.createColumnDefs();
     this.getData();
+    this.frameworkComponents = {
+      buttonRenderer: ButtonRendererComponent,
+    }
   }
   
   createColumnDefs() {
@@ -34,8 +40,8 @@ export class AdminhomeComponent {
       },
       {
         headerName: 'Insurance Name',
-         field: 'insuranceName',
-         sortable: true,
+        field: 'insuranceName',
+        sortable: true,
         filter: true
       },
       {
@@ -55,14 +61,23 @@ export class AdminhomeComponent {
         field: 'insuranceAssuredAmount',
         sortable: true,
         filter: true
-      },
-      {
-        headerName: 'Premium',
-        field: 'premium',
-        sortable: true,
-        filter: true
       }
     ];
+  }
+
+  buybutton (e) {
+    alert("hi");  
+  }
+
+  getData1() {
+    this.apiCallService.gettest().subscribe(
+      res => {
+        console.log(res)
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getData() {
@@ -80,8 +95,27 @@ export class AdminhomeComponent {
     this.router.navigate(['addInsuranceDetails']);
   }
 
-  updateItems() {
+  editItems() {
+    this.insuranceDetails = this.getSelectedRowData();
+    if(this.insuranceDetails.length==0) {
+      alert("Please Select Record !");
+    } else if(this.insuranceDetails.length>1) {
+      alert("More than one record is selected For Edit. Please Select One Only !")
+    } else {
+      //alert(JSON.stringify(this.insuranceDetails));
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          insuranceId: this.insuranceDetails[0].insuranceId,
+          insuranceName: this.insuranceDetails[0].insuranceName,
+          insuranceType: this.insuranceDetails[0].insuranceType,
+          tenure: this.insuranceDetails[0].tenure,
+          insuranceAssuredAmount: this.insuranceDetails[0].insuranceAssuredAmount,
+          premium: this.insuranceDetails[0].premium,
+        }
+      };
+      this.router.navigate(['editInsuranceDetails'], navigationExtras);
 
+    }
   }
 
   onRemoveSelected() {

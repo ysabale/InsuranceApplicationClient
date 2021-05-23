@@ -1,17 +1,13 @@
 <div class="appHeader">
-    <h4>Add Insurance Details</h4>
+    <h4>Edit Insurance Details</h4>
 </div>
 <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Login Form -->
-      <form [formGroup]="addInsuranceDetailsForm" (ngSubmit)="submitForm()">
+      <form [formGroup]="editInsuranceDetailsForm" (ngSubmit)="editForm()">
 
         <div class="form-group col-xs-2">
-            <input type="text" placeholder= "Insurance Id" formControlName="insuranceId" class="form-control" />
-            <div *ngIf="f.insuranceId.touched && f.insuranceId.invalid" class="alert alert-danger">
-                <div *ngIf="f.insuranceId.errors.required">Insurance Id Should be numeric</div>
-                <div *ngIf="f.insuranceId.errors.pattern">Insurance Id Should be numeric</div>
-            </div>
+            <input type="text" readonly placeholder= "Insurance Id" formControlName="insuranceId" class="form-control" />
         </div>
 
         <div class="form-group col-xs-2">
@@ -24,10 +20,6 @@
 
         <div class="form-group col-xs-2">
             <input type="text" placeholder= "Tenure" formControlName="tenure" class="form-control" />
-            <div *ngIf="f.tenure.touched && f.tenure.invalid" class="alert alert-danger">
-                <div *ngIf="f.tenure.errors.required">Enter Numeric Value in tenure</div>
-                <div *ngIf="f.tenure.errors.pattern">Enter Numeric Value in tenure</div>
-            </div>
         </div>
 
         <div class="form-group col-xs-2">
@@ -37,10 +29,9 @@
         <div class="form-group col-xs-2">
             <input type="text" placeholder= "Premium" formControlName="premium" class="form-control" />
         </div>
-
+      
         <div class="form-group col-xs-2">
-          <button  class="btn btn-success" [disabled]="!addInsuranceDetailsForm.valid">Save</button>
-          <button  type="reset" class="btn btn-outline-primary mr-2">Reset</button>
+          <button  class="btn btn-success" >Update</button>
       </div>
       </form>
       <div><H2 style="color: red;">{{errorMessage}}</H2></div>

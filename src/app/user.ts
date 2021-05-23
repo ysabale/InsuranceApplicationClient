@@ -1,5 +1,5 @@
 export interface User {
-    loginId: String;
+    loginId: string;
     password: String;
     name: String;
     address: String;
@@ -10,7 +10,7 @@ export interface User {
     state: String;
     city: String;
     pincode: String;
-    userType: String;
+    userType: string;
 }
 
 

@@ -1,0 +1,20 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <form [formGroup]="registrationForm" (ngSubmit)="SubmitForm()">
+      <div class="form-group col-xs-2">
+            <input type="text" placeholder= "User Name"  formControlName="name" class="form-control" />
+        </div>   
+        <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Mobile No" formControlName="mobileNo" class="form-control" />
+        </div>     
+        <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Login Id"  formControlName="loginId" class="form-control" />
+        </div>  
+        <div class="form-group col-xs-2">
+            <input type="text" placeholder= "password"  formControlName="password" class="form-control" />
+        </div>   
+        <div class="form-group col-xs-2">
+            <button  class="btn btn-success">Save</button>
+            <button  type="reset" class="btn btn-outline-primary mr-2">Reset</button>
+        </div>      
+        <div><H2 style="color: red;">{{errorMessage}}</H2></div>

@@ -19,22 +19,23 @@ export class AddInsuranceDetailsComponent implements OnInit {
     this.createForm();
   }
 
+  get f(){
+    return this.addInsuranceDetailsForm.controls;
+  }
+
   createForm() {
     this.addInsuranceDetailsForm = new FormGroup({
-      insuranceId : new FormControl('',[Validators.required]),
+      insuranceId : new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$")]),
       insuranceName: new FormControl('', [Validators.required]),
       insuranceType: new FormControl('', [Validators.required]),
-      tenure: new FormControl('', [Validators.required]),
+      tenure: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
       insuranceAssuredAmount: new FormControl('', [Validators.required]),
       premium: new FormControl('', [Validators.required]),
       });
     
   }
 
-  submitForm() {
-
-    console.log("Welcome");
-    
+  submitForm() {    
     let insurancedetails: Insurancedetails={
       insuranceId: this.addInsuranceDetailsForm.controls.insuranceId.value,
       insuranceName:this.addInsuranceDetailsForm.controls.insuranceName.value,
@@ -46,7 +47,7 @@ export class AddInsuranceDetailsComponent implements OnInit {
     console.log(insurancedetails);
     this.apiCallsService.saveInsurancedetails(insurancedetails).subscribe(
         resp => { 
-          this.router.navigate(['adminHome']);
+          this.router.navigate(['insurance']);
       },
       (error:any)=>{
         console.log(error.error.errorMessage);

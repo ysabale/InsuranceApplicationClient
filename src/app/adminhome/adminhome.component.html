@@ -1,18 +1,35 @@
-<div style="margin-left: 10%;margin-top: 10px;">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+<div style="margin-left: 2%;margin-top: 10px;">
     <div class="ag-theme-balham">
-<button (click)="onAddRow()"class="btn-link">Add</button>
-<button (click)="updateItems()" class="btn-link">Edit</button>
-<button (click)="onRemoveSelected()" class="btn-link">Delete</button>
+<button *ngIf="loginService.isAdmin()" (click)="onAddRow()"class="btn-link">Add</button>
+<button *ngIf="loginService.isAdmin()" (click)="editItems()" class="btn-link">Edit</button>
+<button *ngIf="loginService.isAdmin()" (click)="onRemoveSelected()" class="btn-link">Delete</button>
 
 <ag-grid-angular 
-style="width: 1203px; height: 500px;" 
+style="width: 800px; height: 500px;" 
 class="ag-theme-balham"
 [pagination]="true"
 [rowData]="rowData" 
 [columnDefs]="columnDefs"
 rowSelection="multiple"
 (gridReady)="onGridReady($event)"
+[frameworkComponents]="frameworkComponents"
 >
 </ag-grid-angular>
 </div>
 </div>
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Here I am!
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+  </ng-template>

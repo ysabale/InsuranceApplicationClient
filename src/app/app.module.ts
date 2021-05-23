@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +11,14 @@ import { UserhomeComponent } from './userhome/userhome.component';
 import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { AddInsuranceDetailsComponent } from './adminhome/add-insurance-details/add-insurance-details.component';
+import { EditInsuranceDetailsComponent } from './adminhome/edit-insurance-details/edit-insurance-details.component';
+import { UserRegistrationComponent } from './userhome/user-registration/user-registration.component';
+import { LogoutComponent } from './logout/logout.component';
+import { HeaderComponent } from './header/header.component';
+import { BasicAuthHtppInterceptorService } from './basic-auth-htpp-interceptor.service';
+import { InsuranceComponent } from './insurance/insurance.component';
+import { BuyInsuranceComponent } from './buy-insurance/buy-insurance.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -19,7 +27,13 @@ import { AddInsuranceDetailsComponent } from './adminhome/add-insurance-details/
     LoginComponent,
     AdminhomeComponent,
     UserhomeComponent,
-    AddInsuranceDetailsComponent
+    AddInsuranceDetailsComponent,
+    EditInsuranceDetailsComponent,
+    UserRegistrationComponent,
+    LogoutComponent,
+    HeaderComponent,
+    InsuranceComponent,
+    BuyInsuranceComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +43,15 @@ import { AddInsuranceDetailsComponent } from './adminhome/add-insurance-details/
     ReactiveFormsModule,
     NgbModule,
     NgbAlertModule,
-    AgGridModule.withComponents(null)
+    AgGridModule.withComponents(null),
+    MatDialogModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: 
+  [
+     {   provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true
+  } 
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [BuyInsuranceComponent]
 })
 export class AppModule { }

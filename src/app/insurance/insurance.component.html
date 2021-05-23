@@ -1,0 +1,66 @@
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+  <div style="margin-left: 2%;margin-top: 10px;">
+      <div class="ag-theme-balham">
+  <button *ngIf="loginService.isAdmin()" (click)="onAddRow()"class="btn-link">Add</button>
+  <button *ngIf="loginService.isAdmin()" (click)="editItems()" class="btn-link">Edit</button>
+  <button *ngIf="loginService.isAdmin()" (click)="onRemoveSelected()" class="btn-link">Delete</button>
+  <button *ngIf="loginService.isUser()" (click)="buyNewPolicy();open(mymodal)" class="btn-link">Buy Policy</button>
+  
+  <ag-grid-angular 
+  style="width: 1000px; height: 500px;" 
+  class="ag-theme-balham"
+  [pagination]="true"
+  [rowData]="rowData" 
+  [columnDefs]="columnDefs"
+  rowSelection="multiple"
+  (gridReady)="onGridReady($event)"
+  [frameworkComponents]="frameworkComponents"
+  >
+  </ag-grid-angular>
+  </div>
+  </div>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Buy Policy</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+   
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <div><H2 style="color: red;">{{errorMessage}}</H2></div>
+        <form [formGroup]="userPolicyForm" (ngSubmit)="saveBuyPolicy()">
+         
+          <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Insurance Id" readonly formControlName="insuranceId" class="form-control" />
+        </div>
+            <div class="form-group col-xs-2">
+              <input type="text" placeholder= "Insurance Name" readonly formControlName="insuranceName" class="form-control" />
+          </div>
+         
+          <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Insurance Type" readonly formControlName="insuranceType" class="form-control" />
+        </div>
+
+        <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Tenure" readonly formControlName="tenure" class="form-control" />
+        </div>
+
+        <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Insurance Assured Amount" readonly formControlName="insuranceAssuredAmount" class="form-control" />
+        </div>
+
+        <div class="form-group col-xs-2">
+            <input type="text" placeholder= "Premium" readonly formControlName="premium" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <button  class="btn btn-success" >Save</button>
+      </div>
+              </form>
+              </div>
+              </div>
+  </ng-template>
+
+    

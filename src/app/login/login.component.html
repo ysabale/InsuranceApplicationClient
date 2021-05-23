@@ -2,8 +2,7 @@
     <div id="formContent">
   
       <!-- Login Form -->
-      <form [formGroup]="signInForm" (ngSubmit)="SubmitForm()">
-
+      <form [formGroup]="signInForm" (ngSubmit)="checkLogin()">
         <div class="form-group col-xs-2">
           <input type="text" placeholder= "User Id" formControlName="loginId" class="form-control" />
       </div>
@@ -15,10 +14,9 @@
           <button  class="btn btn-success" >Log In</button>
       </div>
       </form>
-      <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">Create User</a>
-      </div>
+        <a class="underlineHover"  (click)="createNewUser()">Register Here</a>
+    </div>
       <div><H2 style="color: red;">{{errorMessage}}</H2></div>
     </div>
   </div>

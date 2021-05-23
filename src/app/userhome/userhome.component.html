@@ -1,1 +1,15 @@
-<p>userhome works!</p>
+<div style="margin-left: 10%;margin-top: 10px;">
+    <div class="ag-theme-balham">
+<button (click)="buyInsurance()" class="btn-success">Buy Insurance</button>
+<ag-grid-angular 
+style="width: 1000px; height: 500px;" 
+class="ag-theme-balham"
+[pagination]="true"
+[rowData]="rowData" 
+[columnDefs]="columnDefs"
+rowSelection="multiple"
+(gridReady)="onGridReady($event)"
+[frameworkComponents]="frameworkComponents"
+>
+</ag-grid-angular>
+</div>
